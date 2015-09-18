@@ -66,7 +66,8 @@ scale_factor = 1
 Q_scaled = scale_factor*Q; 
 q_scaled = scale_factor*q; 
 q0_scaled = scale_factor*q0
-obj_matrix = [Q_scaled q_scaled; q_scaled'  q0];     
+obj_matrix = [Q_scaled q_scaled; q_scaled'  q0]; 
+l2_bound = 1.4; 
 
 cvx_begin sdp 
  %   variable V(N+1, N+1) symmetric
@@ -76,7 +77,7 @@ cvx_begin sdp
         0<= U(i, i) <= 1
     end
     U_lifted = [U u; u' 1]
-    trace(U) <= 4.5^2
+    trace(U) <= (l2_bound^2)/(dt)
     U_lifted >= 0
     maximize trace(obj_matrix*U_lifted) 
 cvx_end
