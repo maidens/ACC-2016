@@ -106,9 +106,10 @@ berkeley_colors = ...
 figure 
 plot(dt*(0:N-1), u_opt, 'ko-',  'MarkerFaceColor', berkeley_colors(3, :), 'LineWidth', 2) 
 axis([0 N*dt 0 1.1])
-title('Optimal infusion input') 
+% title('Optimal infusion input') 
 xlabel('time (s)') 
 ylabel('infusion strength') 
+set(gca,'FontSize',20);
 tightfig(gcf); 
 print(gcf, '-dpdf', 'l2-optimal_input.pdf');
 
@@ -129,10 +130,12 @@ hold on
 plot(dt*(0:N), y(1, :),  'o-', 'MarkerFaceColor', berkeley_colors(1, :), 'LineWidth', 2)
 plot(dt*(0:N), y(2, :),  'o-', 'MarkerFaceColor', berkeley_colors(2, :), 'LineWidth', 2)
 hold off
-legend('pyruvate', 'lactate') 
-title('Observed output using optimal input') 
+leg = legend('pyruvate', 'lactate'); 
+% title('Observed output using optimal input') 
 xlabel('time (s)')
 ylabel('observed signal (au)') 
+set(leg,'FontSize',20); 
+set(gca,'FontSize',20);
 tightfig(gcf); 
 print(gcf, '-dpdf', 'l2-optimal_outputs.pdf');
 
@@ -169,9 +172,10 @@ approximation_accuracy = value_boxcar/optimal_value_relaxation
 
 figure 
 plot(dt*(0:N-1), u_star, 'ko-',  'MarkerFaceColor', berkeley_colors(3, :), 'LineWidth', 2) 
-title('Boxcar infusion input') 
+% title('Boxcar infusion input') 
 xlabel('time (s)') 
 ylabel('infusion strength') 
+set(gca,'FontSize',20);
 tightfig(gcf); 
 print(gcf, '-dpdf', 'boxcar_input.pdf');
 
@@ -192,10 +196,12 @@ hold on
 plot(dt*(0:N), y(1, :),  'o-', 'MarkerFaceColor', berkeley_colors(1, :), 'LineWidth', 2)
 plot(dt*(0:N), y(2, :),  'o-', 'MarkerFaceColor', berkeley_colors(2, :), 'LineWidth', 2)
 hold off
-legend('pyruvate', 'lactate') 
-title('Observed output using boxcar input') 
+leg = legend('pyruvate', 'lactate');  
+% title('Observed output using boxcar input') 
 xlabel('time (s)')
 ylabel('observed signal (au)') 
+set(leg,'FontSize',20); 
+set(gca,'FontSize',20);
 tightfig(gcf); 
 print(gcf, '-dpdf', 'boxcar_outputs.pdf');
 

@@ -108,9 +108,10 @@ berkeley_colors = ...
 figure 
 plot(dt*(0:N-1), u_opt, 'ko-',  'MarkerFaceColor', berkeley_colors(3, :), 'LineWidth', 2) 
 axis([0 N*dt 0 1.1])
-title('Optimal input') 
+% title('Optimal input') 
 xlabel('t') 
 ylabel('u(t)') 
+set(gca,'FontSize',20);
 tightfig(gcf); 
 print(gcf, '-dpdf', 'toy_problem_input.pdf');
 
@@ -131,11 +132,13 @@ hold on
 plot(dt*(0:N), y(1, :),  'o-', 'MarkerFaceColor', berkeley_colors(1, :), 'LineWidth', 2)
 plot(dt*(0:N), y(2, :),  'o-', 'MarkerFaceColor', berkeley_colors(2, :), 'LineWidth', 2)
 hold off
-legend('y_1', 'y_2') 
-title('Output from nominal system using optimal input') 
+leg = legend('y_1', 'y_2');  
+% title('Output from nominal system using optimal input') 
 axis([0 3 0 1.4])
 xlabel('t')
 ylabel('y(t)') 
+set(leg,'FontSize',20); 
+set(gca,'FontSize',20);
 tightfig(gcf); 
 print(gcf, '-dpdf', 'toy_problem_outputs.pdf');
 
