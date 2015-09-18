@@ -1,4 +1,4 @@
-function [ Q, q, q0 ] = compute_QCQP_matrices( A, B, C, x0, dA, dB, dx0, K, Sigma, N )
+function [ Q, q, q0 ] = compute_objective_function( A, B, C, x0, dA, dB, dx0, K, Sigma, N )
 
 warning('off', 'MATLAB:nearlySingularMatrix')
 

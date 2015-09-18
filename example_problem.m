@@ -53,9 +53,9 @@ Sigma = eye(1);
 
 %% Translate this problem into a QP with objective function u'*Q*u + q'*u + q0
 
-disp('==== Computing QCQP matrices ====') 
+disp('==== Computing objective function ====') 
 
-[ Q, q, q0 ] = compute_QCQP_matrices( Ad_val, Bd_val, C, x0_val, dA_val, dB_val, dx0_val, K, Sigma, N ); 
+[ Q, q, q0 ] = compute_objective_function( Ad_val, Bd_val, C, x0_val, dA_val, dB_val, dx0_val, K, Sigma, N ); 
   
 
 %%  Solve semidefinite relaxation of l2-constrained problem 
