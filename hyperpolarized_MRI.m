@@ -19,20 +19,23 @@ alpha = 15*pi/180*ones(2, 1);
 dt = 2; 
 
 % system matrices 
-A = [-1/beta                             0    0   0  0; 
-     (A0*factorial(gamma))^(1/gamma) -1/beta  0   0  0; 
-        0 (A0*factorial(gamma))^(1/gamma) -1/beta 0  0; 
-        0          0              kTRANS   -R1P-kPL-(1 - cos(alpha(1, 1)))/dt  0; 
-        0          0                0         kPL   -R1L-(1 - cos(alpha(2, 1)))/dt];     
-B = [1; 0; 0; 0; 0]; 
+A_mini = [-R1P-kPL-(1 - cos(alpha(1, 1)))/dt       0; 
+               kPL             -R1L-(1 - cos(alpha(2, 1)))/dt]; 
+B_mini = [kTRANS; 0]; 
+
+% discretize with zero order hold 
+Abar = expm(dt*A_mini); 
+Bbar = inv(A_mini)*(Abar - eye(size(A_mini, 1)))*B_mini; 
+
+% full discrete-time system 
+Ad = [3*exp(-dt/beta)               -3*exp(-2*dt/beta)     exp(-3*dt/beta)     0           0; 
+             1                              0                     0            0           0; 
+             0                              1                     0            0           0; 
+      A0*exp(-dt/beta)*Bbar(1)  A0*exp(-2*dt/beta)*Bbar(1)        0        Abar(1, 1)  Abar(1, 2);
+      A0*exp(-dt/beta)*Bbar(2)  A0*exp(-2*dt/beta)*Bbar(2)        0        Abar(2, 1)  Abar(2, 2)]; 
+Bd = [1; 0; 0; 0; 0]; 
 C = [0  0  0  sin(alpha(1, 1))  0; 
      0  0  0  0                 sin(alpha(2, 1))]; 
-D = 0; 
-
-% discretized dynamics 
-disp('==== Computing discretized dynamics ====') 
-Ad = expm(dt*A); 
-Bd = inv(A)*(Ad - eye(size(A, 1)))*B; 
 
 % initial condition 
 x0 = zeros(size(A, 1), 1); 
