@@ -38,7 +38,7 @@ C = [0  0  0  sin(alpha(1, 1))  0;
      0  0  0  0                 sin(alpha(2, 1))]; 
 
 % initial condition 
-x0 = zeros(size(A, 1), 1); 
+x0 = zeros(size(Ad, 1), 1); 
 
 % evaluate nominal values of system matrices and initial state 
 x0_val = double(subs(x0, parameters, parameters_val)); 
